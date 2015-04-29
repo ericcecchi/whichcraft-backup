@@ -35,4 +35,5 @@ Heroku setup
         AWS_SECRET_ACCESS_KEY=awsSecret\
         AWS_BUCKET=awsBucketName
     git push heroku master
-
+    
+In the Heroku dashboard, configure scheduler to run `python backup-firebase.py` as often as you desire.
