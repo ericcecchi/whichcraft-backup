@@ -28,7 +28,7 @@ Heroku setup
     heroku create yourapp-backup
     heroku addons:add scheduler
     heroku config:set\
-        FIREBASE_URL=http://yourapp.firebaseio.com/\
+        FIREBASE_URL=https://yourapp.firebaseio.com/\
         FIREBASE_SECRET=firebaseSecret\
         FIREBASE_USERNAME=username\
         AWS_ACCESS_KEY_ID=awsAccessID\
