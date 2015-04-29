@@ -15,10 +15,24 @@ Install
     source venv/bin/activate
     pip install -r requirements.txt
 
-
 Run
 ---
 
 Set the necessary environment variables. Then run:
 
     python backup-firebase.py
+
+Heroku setup
+---------------------
+
+    heroku create yourapp-backup
+    heroku addons:add scheduler
+    heroku config:set\
+        FIREBASE_URL=http://yourapp.firebaseio.com/\
+        FIREBASE_SECRET=firebaseSecret\
+        FIREBASE_USERNAME=username\
+        AWS_ACCESS_KEY_ID=awsAccessID\
+        AWS_SECRET_ACCESS_KEY=awsSecret\
+        AWS_BUCKET=awsBucketName
+    git push heroku master
+

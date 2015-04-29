@@ -6,13 +6,12 @@ import logging
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 
-## FIREBASE ACCESS INFO ##
-firebase_url = 'https://your-app.firebaseio.com/' #Or get from environment variable
+## FIREBASE ACCESS INFO
+firebase_url = os.environ['FIREBASE_URL']
 firebase_secret = os.environ['FIREBASE_SECRET']
-firebase_username = 'my-backup-app' #Username is not actually checked on firebase
+firebase_username = os.environ['FIREBASE_USERNAME']
 
-## AWS S3 ACCESS INFO ##
-# Do not store keys in version control
+## AWS S3 ACCESS INFO
 s3_key = os.environ['AWS_ACCESS_KEY_ID']
 s3_secret = os.environ['AWS_SECRET_ACCESS_KEY']
 s3_bucket = os.environ['AWS_BUCKET']
@@ -23,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 def connect_firebase():
     f = firebase.FirebaseApplication(firebase_url, None)
-    
+
     #Use secret to access ALL data!i
     # Adjust based on your access requirements.
     f.authentication = firebase.FirebaseAuthentication(firebase_secret, firebase_username, admin=True)
@@ -33,7 +32,7 @@ logger.info('Starting firebase data backup now...')
 
 #Use UTC time in key name
 now = datetime.datetime.utcnow()
-name = 'firebase_' + now.strftime('%Y-%m-%d--%H-%M-%S.%f') + '.json' 
+name = 'firebase_' + now.strftime('%Y-%m-%d--%H-%M-%S.%f') + '.json'
 
 f = connect_firebase()
 data = f.get('/', None)
